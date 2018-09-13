@@ -17,41 +17,41 @@
     "profiles": [
       {
         "network": "github",
-        "username": "mmaluhia",
-        "url": "http://github.com/changeme"
+        "username": "AzureFlameGod",
+        "url": "http://github.com/AzureFlameGod"
       },
       {
-        "network": "linkedin",
-        "username": "mollymaluhia",
-        "url": "http://linkedin.com/in/changeme"
+        "network": "",
+        "username": "",
+        "url": ""
       },
       {
-        "network": "twitter",
-        "username": "mollymal",
-        "url": "http://twitter.com/changeme"
+        "network": "",
+        "username": "",
+        "url": ""
       },
       {
-        "network": "instagram",
-        "username": "molly",
-        "url": "http://instagram.com/changeme"
+        "network": "",
+        "username": "",
+        "url": ""
       }
     ]
   },
   "interests": [
     {
-      "name": "internet of things",
+      "name": "Hacking",
       "keywords": [
         "Arduino",
         "TI MSP430"
       ]
     },
     {
-      "name": "data mining",
+      "name": "Cracking",
       "keywords": [
       ]
     },
     {
-      "name": "artificial intelligence",
+      "name": "Slacking",
       "keywords": [
       ]
     }
@@ -66,7 +66,7 @@
         "Java",
         "Javascript",
         "Assembly",
-        "Common Lisp"
+        "Python"
       ]
     },
     {
@@ -84,10 +84,10 @@
   "education": [
     {
       "institution": "University of Hawaii, Honolulu, HI",
-      "area": "Computer Science (expected Spring, 2018)",
-      "studyType": "B.S.",
-      "startDate": "2013-09-01",
-      "endDate": "Present",
+      "area": "",
+      "studyType": "",
+      "startDate": "",
+      "endDate": "",
       "gpa": "",
       "courses": [
       ]
