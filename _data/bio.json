@@ -3,7 +3,7 @@
     "name": "Vincent DiRienzo",
     "label": "Hacker",
     "picture": "https://azureflamegod.github.io/images/17437043.png",
-    "email": "",
+    "email": "vincent.dirienzo@hawaii.edu",
     "phone": "",
     "website": "https://azureflamegod.github.io",
     "summary": "Cybersecurity Enthusist, Software Engineer and Professional Slacker",
@@ -41,8 +41,8 @@
     {
       "name": "Hacking",
       "keywords": [
-        "Arduino",
-        "TI MSP430"
+        "",
+        ""
       ]
     },
     {
