@@ -82,7 +82,7 @@
   "education": [
     {
       "institution": "University of Hawaii, Honolulu, HI",
-      "area": "",
+      "area": "M.S. Computer Science",
       "studyType": "",
       "startDate": "",
       "endDate": "",
@@ -93,24 +93,24 @@
   ],
   "work": [
     {
-      "company": "",
-      "position": "",
+      "company": "Booz Allen Hamilton",
+      "position": "Cybersecurity Developer",
       "website": "",
       "startDate": "",
       "endDate": "",
-      "summary": "",
+      "summary": "Security intern for Booz Allen Hamilton in which we worked on an open source project called TheHive which is an incident responce platform to help workflow get done faster.",
       "highlights": [
         "",
         ""
       ]
     },
     {
-      "company": "",
-      "position": "",
+      "company": "University of Hawaii at Manoa",
+      "position": "Teaching Assistant for Software Engineering",
       "website": "",
       "startDate": "",
       "endDate": "",
-      "summary": "",
+      "summary": "Teaching students in software enginnering and project management",
       "highlights": [
         "",
         ""
@@ -119,12 +119,12 @@
   ],
   "volunteer": [
     {
-      "organization": "",
+      "organization": "Cyber Hui",
       "website": "",
-      "position": "",
+      "position": "Youth Vice President",
       "startDate": "",
       "endDate": "",
-      "summary": "",
+      "summary": "Helping Hawaii's youth get educated in cybersecurity",
       "highlights": [
         "",
         ""
@@ -152,10 +152,10 @@
       "summary": ""
     },
     {
-      "title": "",
+      "title": "CyberStart",
       "date": "",
-      "awarder": "",
-      "summary": ""
+      "awarder": "SANS",
+      "summary": "Cybersecurity competition within the US in which I got 1st place in Hawaii and 4th in the country."
     }
   ],
   "references": [
