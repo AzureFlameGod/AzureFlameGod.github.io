@@ -82,7 +82,7 @@
   "education": [
     {
       "institution": "University of Hawaii, Honolulu, HI",
-      "area": "M.S. Computer Science",
+      "area": "Computer Science",
       "studyType": "",
       "startDate": "",
       "endDate": "",
@@ -100,8 +100,8 @@
       "endDate": "",
       "summary": "Security intern for Booz Allen Hamilton in which we worked on an open source project called TheHive which is an incident responce platform to help workflow get done faster.",
       "highlights": [
-        "",
-        ""
+        "Worked with TheHive developers to add features and fix bugs.",
+        "Completed the Summer Games"
       ]
     },
     {
@@ -112,8 +112,8 @@
       "endDate": "",
       "summary": "Teaching students in software enginnering and project management",
       "highlights": [
-        "",
-        ""
+        "Teaching athetic programming in Javascript",
+        "Teaching students how to manage projects in a team environment"
       ]
     }
   ],
@@ -126,8 +126,8 @@
       "endDate": "",
       "summary": "Helping Hawaii's youth get educated in cybersecurity",
       "highlights": [
-        "",
-        ""
+        "Working with CyberPatriots in order to form teams in Hawaii to compete on a national level.",
+        "Bringing together AFCEA, ISSA and ISC2 in order to bring professionals to help our youth."
       ]
     },
     {
