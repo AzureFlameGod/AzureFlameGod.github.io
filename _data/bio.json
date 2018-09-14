@@ -130,26 +130,13 @@
         "Bringing together AFCEA, ISSA and ISC2 in order to bring professionals to help our youth."
       ]
     },
-    {
-      "organization": "",
-      "website": "",
-      "position": "",
-      "startDate": "",
-      "endDate": "",
-      "summary": "",
-      "highlights": [
-        "",
-        "",
-        ""
-      ]
-    }
   ],
   "awards": [
     {
-      "title": "",
+      "title": "Best VR App",
       "date": "",
-      "awarder": "",
-      "summary": ""
+      "awarder": "AT&T",
+      "summary": "Created a public speaking application in which we won 1st place."
     },
     {
       "title": "CyberStart",
