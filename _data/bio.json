@@ -71,11 +71,10 @@
       "name": "Toolsets/OS",
       "level": "",
       "keywords": [
+        "WIndows",
         "MacOS",
         "Ubuntu",
         "Git/GitHub",
-        "WIndows",
-        ""
       ]
     }
   ],
