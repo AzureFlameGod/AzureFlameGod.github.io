@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="style/main.css?newversion"/>
+
+    <style>
+
+</style>
+
+
+    <script
+        src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js">
+    </script>
+      <script src="js/part3a.js"></script>
+    <script src = "https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+    <title>Dashboard</title>
+  </head>
+  <body style="width: 6830px; height: 2160px">
+    <div class="title"><h1 style="text-align: center;font-family:verdana, arial, sans-serif; font-size: 48px; fill: rgb(68, 68, 68); opacity: 1; font-weight: normal; white-space: pre;">Dashboard</h1></div>
+    <div class="container-fluid">
+    <div class="row" >
+          <div class="col-xl-6"><div id="graph"></div></div>
+        <div class="col-xl-6"><div id="graph2"></div></div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4">
+        <div id="graph2b">
+          <div class="infobutton"><span class="infotext">This Webpage is created by AzureGod<br>PlotlyJs, D3, Leaflet, Bootstrap are the libraries that are used in this project<br>The datasets come from:?</span><img src="data/infoicon.png"></div>
+        
+      </div>
+    </div>
+      <div class="col-xl-4" id="graph2b2"></div>
+      <div class="col-xl-4">
+          <div><text style="font-family:verdana, arial, sans-serif; font-size: 36px; fill: rgb(68, 68, 68); opacity: 1; font-weight: normal; white-space: pre;">London Map of Water Pumps and Cholera Death Counts</text></div>
+          <div id="map" style="width: 1800; height: 1000px"></div></div>
+    </div>
+  </div>
+    <script src="js/part1.js?newversion"></script>
+    <script src="js/part2a.js?newversion"></script>
+    <script src="js/part2b.js?newversion"></script>
+    <script src="js/part3a.js?newversion"></script>
+  </body>
+</html>
