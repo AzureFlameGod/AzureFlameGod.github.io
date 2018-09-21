@@ -12,7 +12,7 @@ labels:
 summary: My team developed an android application that would help people find parking before they reach their destination. This app was created for AngelHack.
 ---
 <div class="ui small rounded images">
-  <div style="height:42px;width:42px">
+  <div style="height:500px;width:500px">
     <img style="height:42px" src="../images/parkhome.PNG">
     <img style="height:42px" src="../images/parkbusiness.PNG">
 </div>
