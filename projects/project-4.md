@@ -13,8 +13,8 @@ summary: My team developed an android application that would help people find pa
 ---
 <div class="ui small rounded images">
   <div style="height:500px;width:500px">
-    <img style="height:500px" src="../images/parkhome.PNG">
-    <img style="height:500px" src="../images/parkbusiness.PNG">
+    <img style="height:500px;width:500px" src="../images/parkhome.PNG">
+    <img style="height:500px;width:500px" src="../images/parkbusiness.PNG">
 </div>
 
 
