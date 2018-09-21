@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: images/parklogo.jpg
+image: images/parklogo.png
 title: Park 4 Life
 permalink: projects/park4life
 # All dates must be YYYY-MM-DD format!
