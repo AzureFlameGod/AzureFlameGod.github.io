@@ -42,13 +42,13 @@ var force = d3.layout.force()
     .on("tick", tick)
     .start();
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("body").append("svg")//messed up here
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var circle = svg.selectAll("circle")
+var circle = svg.selectAll("circle")//creation of circle nodes
     .data(nodes, function(d) { return d.id;})
   .enter().append("circle")
     .attr("r", function(d) { return d.radius; })
