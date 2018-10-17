@@ -17,10 +17,6 @@ circle {
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-// http://stackoverflow.com/questions/9539294/adding-new-nodes-to-force-directed-layout
-// http://bl.ocks.org/mbostock/1804919 -- original
-// http://bl.ocks.org/mbostock/1095795 -- add/remove elements
-
 var margin = {top: 0, right: 0, bottom: 0, left: 0},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -56,7 +52,7 @@ var circle = svg.selectAll("circle")
     .style("fill", function(d) { return d.color; })
     .call(force.drag);
 
-// Update dom as transactions come and go
+// Updates the DOM as time goes on
 var id = 0;
 function tick(e) {
   var now = new Date().getTime();
@@ -97,7 +93,7 @@ function tick(e) {
   force.start();
 }
 
-// Move nodes toward cluster focus.
+// Clustering nodes
 function gravity(alpha) {
   return function(d) {
     d.y += (d.cy - d.y) * alpha;
@@ -107,7 +103,7 @@ function gravity(alpha) {
   };
 }
 
-// Resolve collisions between nodes.
+// The nodes started to collide so this is to stop them from stopping
 function collide(alpha) {
   var quadtree = d3.geom.quadtree(nodes);
   return function(d) {
@@ -137,8 +133,7 @@ function collide(alpha) {
     });
   };
 }
-
-// Stream over transaction dataset delivering entry events by callback
+// Stream over file packets
 
 var stream = null;
 
@@ -169,13 +164,14 @@ function playnext (callback) {
   }
 }
 
+  //If there are nodes that should have finished, remove them
 function adjust (json) {
   for (var i = json.length - 1; i >= 0; i--) {
-    json[i][0] -= json[i][2];   // move time back to start of transaction
+    json[i][0] -= json[i][2];   //start of transaction
   }
   json.sort(function(a,b){ return a[0]-b[0]; });
   while(json[0][2]>1000) {
-    json.shift();               // remove stragglers from long ago
+    json.shift();               
   }
 }
 
@@ -187,10 +183,7 @@ function playback (error, json) {
     adjust(json);
     stream = {start: now, wall: now, sleep: 0, first: json[0][0], last: json[json.length-1][0], index: 0, data: json,};
   }
-
 }
 
 d3.json("nr-queuing-spike-zoom.json", playback);
-
-
 </script>
