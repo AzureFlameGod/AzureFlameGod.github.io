@@ -2,6 +2,10 @@
 <meta charset="utf-8">
 <style>
 
+document.addEventListener('DOMContentLoaded', function(e) {
+<script src="app.js"></script>
+<link rel="stylesheet" href="app.css">
+  
 circle {
   stroke: #fff;
 }
@@ -186,4 +190,6 @@ function playback (error, json) {
 }
 
 d3.json("nr-queuing-spike-zoom.json", playback);
+});
 </script>
+  
