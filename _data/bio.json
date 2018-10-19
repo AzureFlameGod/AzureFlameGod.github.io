@@ -73,10 +73,13 @@
       "name": "Toolsets/OS",
       "level": "",
       "keywords": [
-        "WIndows",
+        "Windows",
         "MacOS",
         "Ubuntu",
         "Git/GitHub",
+        "Sublime",
+        "IntelliJ",
+        "Virtualization Software",
       ]
     }
   ],
