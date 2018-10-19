@@ -48,11 +48,6 @@
       "keywords": [
       ]
     },
-    {
-      "name": "Slacking",
-      "keywords": [
-      ]
-    }
   ],
   "skills": [
     {
@@ -64,7 +59,9 @@
         "Java",
         "Javascript",
         "Assembly",
-        "Python"
+        "Python",
+        "Golang",
+        "Swift"
       ]
     },
     {
