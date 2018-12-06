@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="https://underscorejs.org/underscore.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="result"></div>
+<table id="table-sparkline">
+    <thead>
+    <tr>
+        <th onclick="sortTable(0)">Building</th>
+        <th onclick="sortTable(1)">Total Devices</th>
+        <th>Devices per Day</th>
+        <th></th>
+        <th>Change From Previous Day</th>
+    </tr>
+    <tr>
+        <th></th>
+        <th></th>
+        <td/>
+        <td></td>
+        <td/>
+    </tr>
+
+    </thead>
+    <tbody id="tbody-sparkline">
+    <tr>
+        <td align="left">Bachman</td>
+        <td align="center">12713</td>
+        <td data-sparkline="1545, 1513, 1197, 1175, 3072, 2845, 1366"/>
+        <td></td>
+        <td data-sparkline="-32, -316, -22, 1897, -227, -1479; column"/>
+    </tr>
+    <tr>
+        <td align="left">Kuykendall N.</td>
+        <td align="center">14630</td>
+        <td data-sparkline="876, 575, 292, 409, 4875, 4449, 3154"/>
+        <td></td>
+        <td data-sparkline="-301, -283, 117, 4466, -426, -1295; column"/>
+    </tr>
+    <tr>
+        <td align="left">Kuykendall W.</td>
+        <td align="center">28298</td>
+        <td data-sparkline="1573, 1192, 863, 1153, 9279, 8421, 5817"/>
+        <td></td>
+        <td data-sparkline="-381, -329, 290, 8126, -858, -2604; column"/>
+    </tr>
+    <tr>
+        <td align="left">Geophysics</td>
+        <td align="center">28298</td>
+        <td data-sparkline="1463, 1291, 726, 920, 6733, 6346, 4261"/>
+        <td></td>
+        <td data-sparkline="-172, -565, 194, 5813, -387, -2085; column"/>
+    </tr>
+    <tr>
+        <td align="left">Physical Science</td>
+        <td align="center">14041</td>
+        <td data-sparkline="613, 503, 354, 621, 4638, 4309, 3003"/>
+        <td></td>
+        <td data-sparkline="-110, -149, 267, 4017, -329, -1306; column"/>
+    </tr>
+    <tr>
+        <td align="left">Sinclair Libary</td>
+        <td align="center">28638</td>
+        <td data-sparkline="2837, 2298, 1869, 1652, 7903, 7920, 4159"/>
+        <td></td>
+        <td data-sparkline="-539, -429, -217, 6251, 17, -3761; column"/>
+    </tr>
+    <tr>
+        <td align="left">Administrative</td>
+        <td align="center">18607</td>
+        <td data-sparkline="2073, 1350, 944, 928, 5473, 4955, 2884"/>
+        <td></td>
+        <td data-sparkline="-723, -406, -16, 4545, -518, -2071; column"/>
+    </tr>
+    <tr>
+        <td align="left">Parking Kiosk</td>
+        <td align="center">22908</td>
+        <td data-sparkline="2904, 1822, 1603, 1377, 6016, 5849, 3337"/>
+        <td></td>
+        <td data-sparkline="-1082, -219, -226, 4639, -167, -2512; column"/>
+    </tr>
+    <tr>
+        <td align="left">Crawford Hall</td>
+        <td align="center">19856</td>
+        <td data-sparkline="1407, 1188, 509, 694, 5571, 6197, 4290"/>
+        <td></td>
+        <td data-sparkline="-219, -679, 185, 4877, 626, -1907; column"/>
+    </tr>
+    <tr>
+        <td align="left">Hawai'i Hale</td>
+        <td align="center">24560</td>
+        <td data-sparkline="1744, 1168, 586, 621, 7560, 7581, 5300"/>
+        <td></td>
+        <td data-sparkline="-576, -582, 35, 6939, 21, -2281; column"/>
+    </tr>
+    <tr>
+        <td align="left">QLCC</td>
+        <td align="center">26244</td>
+        <td data-sparkline="2659, 1789, 1250, 1236, 7550, 7153, 4607"/>
+        <td></td>
+        <td data-sparkline="-870, -539, -14, 6314, -397, -2546; column"/>
+    </tr>
+    <tr>
+        <td align="left">Kennedy Theatre</td>
+        <td align="center">13279</td>
+        <td data-sparkline="1440, 1573, 1061, 1563, 3016, 3036, 1590"/>
+        <td></td>
+        <td data-sparkline="133, -512, 502, 1453, 20, -1446; column"/>
+    </tr>
+    <tr>
+        <td align="left">Hamilton Library</td>
+        <td align="center">24532</td>
+        <td data-sparkline="2096, 1229, 796, 957, 7516, 6909, 5029"/>
+        <td></td>
+        <td data-sparkline="--867, -433, 161, 6559, -607, -1880; column"/>
+    </tr>
+    <tr>
+        <td align="left">Keller Hall</td>
+        <td align="center">32644</td>
+        <td data-sparkline="2145, 1087, 738, 1014, 10864, 9531, 7265"/>
+        <td></td>
+        <td data-sparkline="-1058, -349, 276, 9850, -1333, -2266; column"/>
+    </tr>
+    <tr>
+        <td align="left">Webster Hall</td>
+        <td align="center">19978</td>
+        <td data-sparkline="1611, 1144, 1462, 1380, 5963, 4751, 3667"/>
+        <td></td>
+        <td data-sparkline="-467, 318, -82, 4583, -1212, -1084; column"/>
+    </tr>
+    <tr>
+        <td align="left">East-West Kiosk</td>
+        <td align="center">23092</td>
+        <td data-sparkline="2361, 2643, 2133, 2441, 5514, 5143, 2857"/>
+        <td></td>
+        <td data-sparkline="282, -510, 308, 3073, -371, -2286; column"/>
+    </tr>
+    <tr>
+        <td align="left">Oceanography</td>
+        <td align="center">6460</td>
+        <td data-sparkline="535, 382, 224, 305, 1718, 2030, 1266"/>
+        <td></td>
+        <td data-sparkline="-153, -158, 81, 1413, 312, -764; column"/>
+    </tr>
+    <tr>
+        <td align="left">Watanabe</td>
+        <td align="center">22088</td>
+        <td data-sparkline="1847, 1256, 950, 1494, 6419, 6135, 3987"/>
+        <td></td>
+        <td data-sparkline="-591, -306, 544, 4925, -284, -2148; column"/>
+    </tr>
+    <tr>
+        <td align="left">Art Building</td>
+        <td align="center">35222</td>
+        <td data-sparkline="2450, 1563, 1003, 1231, 11660, 9967, 7348"/>
+        <td></td>
+        <td data-sparkline="-887, -560, 228, 10429, -1693, -2619; column"/>
+    </tr>
+    <tr>
+        <td align="left">Law School</td>
+        <td align="center">33874</td>
+        <td data-sparkline="3296, 3109, 2243, 2137, 9008, 9038, 5043"/>
+        <td></td>
+        <td data-sparkline="-187, -866, -106, 6871, 30, -3995; column"/>
+    </tr>
+    <tr>
+        <td align="left">Law Libary</td>
+        <td align="center">41839</td>
+        <td data-sparkline="3644, 3875, 2965, 2975, 11354, 10289, 6287"/>
+        <td></td>
+        <td data-sparkline="231, -910, 10, 8379, -1065, -4002; column"/>
+    </tr>
+    <tr>
+        <td align="left">Korean Studies</td>
+        <td align="center">24613</td>
+        <td data-sparkline="2645, 1971, 1586, 1810, 6434, 6339, 3828"/>
+        <td></td>
+        <td data-sparkline="-674, -385, 224, 4624, -95, -2511; column"/>
+    </tr>
+    <tr>
+        <td align="left">Recreation Center</td>
+        <td align="center">19590</td>
+        <td data-sparkline="1615, 1449, 1142, 856, 6160, 5586, 2782"/>
+        <td></td>
+        <td data-sparkline="-166, -307, -286, 5304, -574, -2804; column"/>
+    </tr>
+    <tr>
+        <td align="left">Campus Center</td>
+        <td align="center">44078</td>
+        <td data-sparkline="4474, 3372, 2220, 1705, 12762, 11909, 7636"/>
+        <td></td>
+        <td data-sparkline="-1102, -1152, -515, 11057, -853, -4273; column"/>
+    </tr>
+    <tr>
+        <td align="left">Gateway House</td>
+        <td align="center">42550</td>
+        <td data-sparkline="3201, 5248, 3740, 4459, 9448, 10506, 5948"/>
+        <td></td>
+        <td data-sparkline="2047, -1508, 719, 4989, 1058, -4558; column"/>
+    </tr>
+</table>
+</body>
+</html>
+<script>
+    /**
+     * Create a constructor for sparklines that takes some sensible defaults and merges in the individual
+     * chart options. This function is also available from the jQuery plugin as $(element).highcharts('SparkLine').
+     */
+
+        Highcharts.SparkLine = function (a, b, c) {
+            var hasRenderToArg = typeof a === 'string' || a.nodeName,
+                options = arguments[hasRenderToArg ? 1 : 0],
+                defaultOptions = {
+                    chart: {
+                        renderTo: (options.chart && options.chart.renderTo) || this,
+                        backgroundColor: null,
+                        borderWidth: 0,
+                        type: 'area',
+                        margin: [2, 0, 2, 0],
+                        width: 120,
+                        height: 20,
+                        style: {
+                            overflow: 'visible'
+                        },
+
+                        // small optimalization, saves 1-2 ms each sparkline
+                        skipClone: true
+                    },
+                    title: {
+                        text: ''
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    xAxis: {
+                        labels: {
+                            enabled: false
+                        },
+                        title: {
+                            text: null
+                        },
+                        startOnTick: false,
+                        endOnTick: false,
+                        tickPositions: []
+                    },
+                    yAxis: {
+                        endOnTick: false,
+                        startOnTick: false,
+                        labels: {
+                            enabled: false
+                        },
+                        title: {
+                            text: null
+                        },
+                        tickPositions: [0]
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        backgroundColor: null,
+                        borderWidth: 0,
+                        shadow: false,
+                        useHTML: true,
+                        hideDelay: 0,
+                        shared: true,
+                        padding: 0,
+                        positioner: function (w, h, point) {
+                            return {x: point.plotX - w / 2, y: point.plotY - h};
+                        }
+                    },
+                    plotOptions: {
+                        series: {
+                            animation: false,
+                            lineWidth: 1,
+                            shadow: false,
+                            states: {
+                                hover: {
+                                    lineWidth: 1
+                                }
+                            },
+                            marker: {
+                                radius: 1,
+                                states: {
+                                    hover: {
+                                        radius: 2
+                                    }
+                                }
+                            },
+                            fillOpacity: 0.25
+                        },
+                        column: {
+                            negativeColor: '#910000',
+                            borderColor: 'silver'
+                        }
+                    }
+                };
+
+            options = Highcharts.merge(defaultOptions, options);
+
+            return hasRenderToArg ?
+                new Highcharts.Chart(a, options, c) :
+                new Highcharts.Chart(options, b);
+        };
+
+        var start = +new Date(),
+            $tds = $('td[data-sparkline]'),
+            fullLen = $tds.length,
+            n = 0;
+
+        // Creating 153 sparkline charts is quite fast in modern browsers, but IE8 and mobile
+        // can take some seconds, so we split the input into chunks and apply them in timeouts
+        // in order avoid locking up the browser process and allow interaction.
+        function doChunk() {
+            var time = +new Date(),
+                i,
+                len = $tds.length,
+                $td,
+                stringdata,
+                arr,
+                data,
+                chart;
+
+            for (i = 0; i < len; i += 1) {
+                $td = $($tds[i]);
+                stringdata = $td.data('sparkline');
+                arr = stringdata.split('; ');
+                data = $.map(arr[0].split(', '), parseFloat);
+                chart = {};
+
+                if (arr[1]) {
+                    chart.type = arr[1];
+                }
+                $td.highcharts('SparkLine', {
+                    series: [{
+                        data: data,
+                        pointStart: 1
+                    }],
+                    tooltip: {
+                        headerFormat: '<span style="font-size: 10px">'  + 'Day {point.x}:</span><br/>',
+                        pointFormat: '<b>{point.y}</b> Devices'
+                    },
+                    chart: chart
+                });
+
+                n += 1;
+
+                // If the process takes too much time, run a timeout to allow interaction with the browser
+                if (new Date() - time > 500) {
+                    $tds.splice(0, i + 1);
+                    setTimeout(doChunk, 0);
+                    break;
+                }
+
+            }
+        }
+
+        doChunk();
+
+
+    function sortTable(n) {
+        console.log(n);
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        table = document.getElementById("table-sparkline");
+        switching = true;
+        // Set the sorting direction to ascending:
+        dir = "asc";
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+            // Start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /* Loop through all table rows (except the
+            first, which contains table headers): */
+            for (i = 1; i < (rows.length - 1); i++) {
+                // Start by saying there should be no switching:
+                shouldSwitch = false;
+                /* Get the two elements you want to compare,
+                one from current row and one from the next: */
+                x = rows[i].getElementsByTagName("TD")[n];
+                y = rows[i + 1].getElementsByTagName("TD")[n];
+                /* Check if the two rows should switch place,
+                based on the direction, asc or desc: */
+                if (dir == "asc") {
+                    if(n == 0){
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                    if(n == 1){
+                        if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                } else if (dir == "desc") {
+                    if(n == 0) {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                    if(n == 1){
+                        if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                            // If so, mark as a switch and break the loop:
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (shouldSwitch) {
+                /* If a switch has been marked, make the switch
+                and mark that a switch has been done: */
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+                // Each time a switch is done, increase this count by 1:
+                switchcount ++;
+            } else {
+                /* If no switching has been done AND the direction is "asc",
+                set the direction to "desc" and run the while loop again. */
+                if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                }
+            }
+        }
+    }
+</script>
+
+</script>

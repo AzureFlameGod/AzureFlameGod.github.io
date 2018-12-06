@@ -1,0 +1,647 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css">
+    <title>Campus Devices by Location | Streaming data</title>
+
+    <style type="text/css">
+        body, html, select {
+            font: 10pt sans-serif;
+        }
+    </style>
+
+
+</head>
+<body>
+<h2>UH Campus Data | Streaming Comparison</h2>
+<p style="max-width: 700px;">
+   This visualization takes in a constant stream of data and relates into another data stream. Built using vis.js.
+</p>
+
+<p>
+    <label for="refresh">Refresh Every <select id="refresh">
+        <option value="zero">0</option>
+        <option value="tenth">1/10</option>
+        <option selected="selected" value="one">1</option>
+        <option value="two">2</option>
+        <option value="three">3</option>
+        <option value="five">5</option>
+        <option value="ten">10</option>
+    </select> second(s)</label>
+
+</p>
+<p>
+    <label for="building"></div>Building:</label>
+    <select id="building">
+        <option value="admin">Administrative Services</option>
+        <option value="art">Art Building</option>
+        <option value="bachman">Bachman</option>
+        <option value="campusCenter">Campus Center</option>
+        <option value="crawford">Crawford Hall</option>
+        <option value="eastWest">East-West Parking Kiosk</option>
+        <option value="gateway">Gateway House</option>
+        <option value="geophysics">Geophysics</option>
+        <option selected="selected" value="hamilton">Hamilton Library</option>
+        <option value="hawaii">Hawai'i Hale</option>
+        <option value="keller">Keller Hall</option>
+        <option value="kennedy">Kennedy Theatre</option>
+        <option value="koreanStudies">Korean Studies</option>
+        <option value="kuykendallNorth">Kuykendall North</option>
+        <option value="kuykendallWest">Kuykendall West</option>
+        <option value="lawLibrary">Law Library</option>
+        <option value="lawSchool">Law School</option>
+        <option value="oceanography">Oceanography</option>
+        <option value="physical">Physical Science</option>
+        <option value="qlcc">Queen Lili'oukalani Center</option>
+        <option value="sinclair">Sinclair Library</option>
+        <option value="parking">Sinclair Parking Kiosk</option>
+        <option value="recCenter">Warrior Rec Center</option>
+        <option value="watanabe">Watanabe Hall</option>
+        <option value="webster">Webster Hall</option>
+    </select>
+    <label for="building2">Compare to: </label>
+    <select id="building2">
+        <option value="admin">Administrative Services</option>
+        <option value="art">Art Building</option>
+        <option value="bachman">Bachman</option>
+        <option value="campusCenter">Campus Center</option>
+        <option value="crawford">Crawford Hall</option>
+        <option value="eastWest">East-West Parking Kiosk</option>
+        <option value="gateway">Gateway House</option>
+        <option value="geophysics">Geophysics</option>
+        <option value="hamilton">Hamilton Library</option>
+        <option value="hawaii">Hawai'i Hale</option>
+        <option value="keller">Keller Hall</option>
+        <option value="kennedy">Kennedy Theatre</option>
+        <option value="koreanStudies">Korean Studies</option>
+        <option value="kuykendallNorth">Kuykendall North</option>
+        <option value="kuykendallWest">Kuykendall West</option>
+        <option value="lawLibrary">Law Library</option>
+        <option value="lawSchool">Law School</option>
+        <option value="oceanography">Oceanography</option>
+        <option value="physical">Physical Science</option>
+        <option value="qlcc">Queen Lili'oukalani Center</option>
+        <option selected="selected" value="sinclair">Sinclair Library</option>
+        <option value="parking">Sinclair Parking Kiosk</option>
+        <option value="recCenter">Warrior Rec Center</option>
+        <option value="watanabe">Watanabe Hall</option>
+        <option value="webster">Webster Hall</option>
+    </select>
+
+</p>
+<button class="button" style="margin-left:10px" onclick="resetter()">Reset</button>
+<input type="button" id="mixBut" value="Start" />
+<br/>
+<br/>
+<div id="visualization"></div>
+
+<script type="text/javascript">
+
+    //I'm using globals. Forgive me for I have sinned
+    var counter = 0;
+    var building = document.getElementById('building');
+    var building2 = document.getElementById('building2');
+    var speed = document.getElementById('refresh');
+    var reset = 0;
+    var go = 0;
+
+    function resetter(){
+        reset = 1;
+        return 0;
+    }
+
+    var mixBut = document.getElementById("mixBut");
+
+    mixBut.addEventListener("click", Start);
+
+    function Start(){
+        console.log("Started");
+        mixBut.removeEventListener("click", Start);
+        mixBut.addEventListener("click", Stop);
+        mixBut.value = "Stop";
+        go = 1;
+    }
+
+    function Stop(){
+        console.log("Stopped");
+        mixBut.removeEventListener("click", Stop);
+        mixBut.addEventListener("click", Start);
+        mixBut.value = "Start";
+        go = 0;
+    }
+
+    var options = {
+        legend: true,
+        start: '2018-8-16',//vis.moment().add(-30, 'seconds'), // changed so its faster
+        end: '2018-8-22',
+        dataAxis: {
+            left: {
+                range: {
+                    min: 0, max: 1500
+                }
+            }
+        },
+        drawPoints: {
+            style: 'circle' // square, circle
+        },
+        shaded: {
+            orientation: 'bottom' // top, bottom
+        }
+    };
+    var names = ['Administrative Services', 'Art Building', 'Bachman', 'Campus Center', 'Crawford', 'East West Parking Kiosk', 'Gateway House',
+        'Geophysics', 'Hamilton Library', 'Hawai\'i Hale', 'Keller Hall', 'Kennedy Theatre', 'Korean Studies', 'Kuykendall North',
+        'Kuykendall West', ' Law Library', 'Law School', 'Oceanography', 'Physical Science', 'Queen Lili\'oukalani Center', 'Sinclair',
+        'Sinclair Parking Kiosk', 'Warrior Rec Center', 'Watanabe Hall', 'Webster Hall'];
+
+
+    var dataset = new vis.DataSet();
+    var groups = new vis.DataSet();
+    var container = document.getElementById('visualization');
+
+    for(var i = 0; i < names.length; i++){
+        groups.add({
+            id: i,
+            content: names[i]
+        });
+    }
+    var graph2d = new vis.Graph2d(container, dataset, groups, options);
+
+
+
+    Plotly.d3.csv("https://raw.githubusercontent.com/ManoaDataVisualizationProject/JAE/master/UHWeekXL.csv", function (err, rows) {
+        function unpack(rows, key) {
+            return rows.map(function (row) {
+                return row[key];
+            });
+        }
+
+        var buildingStream = [];
+        var buildingStream2 = [];
+        var DELAY = 1000; // delay in ms to add new data points
+        // create a graph2d with an (currently empty) dataset
+
+
+
+        window.dates = unpack(rows, 'Access Point ID').splice(4, 151);
+        for(var i = 0; i < dates.length; i++){
+            dates[i] = new Date(dates[i]);
+        }
+
+        window.bachman = unpack(rows, '1').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.kuykendallNorth = unpack(rows, '2').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.kuykendallWest = unpack(rows, '3').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.geophysics = unpack(rows, '4').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.physical = unpack(rows, '5').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.sinclair = unpack(rows, '6').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.admin = unpack(rows, '7').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.parking = unpack(rows, '8').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.crawford = unpack(rows, '9').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.hawaii = unpack(rows, '10').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.qlcc = unpack(rows, '11').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.kennedy = unpack(rows, '12').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.hamilton = unpack(rows, '13').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.keller = unpack(rows, '14').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.webster = unpack(rows, '16').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.eastWest = unpack(rows, '17').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.oceanography = unpack(rows, '18').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.watanabe = unpack(rows, '20').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.art = unpack(rows, '21').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.lawSchool = unpack(rows, '24').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.lawLibrary = unpack(rows, '25').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.koreanStudies = unpack(rows, '26').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.recCenter = unpack(rows, '27').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.campusCenter = unpack(rows, '29').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+        window.gateway = unpack(rows, '30').splice(4, 151).map(function (x) {
+            return parseInt(x, 10)
+        });
+
+
+        function delayCheck() {
+
+            var ret;
+            switch (speed.value) {
+                case 'zero':
+                    ret = 0;
+                    break;
+                case 'tenth':
+                    ret = 100;
+                    break;
+                case 'one':
+                    ret = 1000;
+                    break;
+                case 'two':
+                    ret = 2000;
+                    break;
+                case 'three':
+                    ret = 3000;
+                    break;
+                case 'five':
+                    ret = 5000;
+                    break;
+                case 'ten':
+                    ret = 10000;
+                    break;
+                default:
+                    ret = 1000;
+                    break;
+            }
+            return ret;
+        }
+
+        function groupCheck(build){
+            var ret;
+            switch (build) {
+                case 'admin':
+                    ret = 0;
+                    break;
+                case 'art':
+                    ret = 1;
+                    break;
+                case 'bachman':
+                    ret = 2;
+                    break;
+                case 'campusCenter':
+                    ret = 3;
+                    break;
+                case 'crawford':
+                    ret = 4;
+                    break;
+                case 'eastWest':
+                    ret = 5;
+                    break;
+                case 'gateway':
+                    ret = 6;
+                    break;
+                case 'geophysics':
+                    ret = 7;
+                    break;
+                case 'hamilton':
+                    ret = 8;
+                    break;
+                case 'hawaii':
+                    ret = 9;
+                    break;
+                case 'keller':
+                    ret = 10;
+                    break;
+                case 'kennedy':
+                    ret = 11;
+                    break;
+                case 'koreanStudies':
+                    ret = 12;
+                    break;
+                case 'kuykendallNorth':
+                    ret = 13;
+                    break;
+                case 'kuykendallWest':
+                    ret = 14;
+                    break;
+                case 'lawlibrary':
+                    ret = 15;
+                    break;
+                case 'lawSchool':
+                    ret = 16;
+                    break;
+                case 'oceanography':
+                    ret = 17;
+                    break;
+                case 'physical':
+                    ret = 18;
+                    break;
+                case 'qlcc':
+                    ret = 19;
+                    break;
+                case 'sinclair':
+                    ret = 20;
+                    break;
+                case 'parking':
+                    ret = 21;
+                    break;
+                case 'recCenter':
+                    ret = 22;
+                    break;
+                case 'watanabe':
+                    ret = 23;
+                    break;
+                case 'webster':
+                    ret = 24;
+                    break;
+            }
+            return ret;
+        }
+
+        function resetCheck(){
+            if(reset === 1){
+                graph2d.destroy();
+                reset = 0;
+                dataset = new vis.DataSet();
+                container = document.getElementById('visualization');
+                graph2d = new vis.Graph2d(container, dataset, groups, options);
+                counter = 0;
+                graph2d.setWindow(dates[counter - 12], dates[counter + 12]);
+            }
+        }
+
+
+        // a function to generate data points
+        function y(x) {
+            switch (building.value) {
+                case 'admin':
+                    buildingStream = admin;
+                    break;
+                case 'art':
+                    buildingStream = art;
+                    break;
+                case 'bachman':
+                    buildingStream = bachman;
+                    break;
+                case 'campusCenter':
+                    buildingStream = campusCenter;
+                    break;
+                case 'crawford':
+                    buildingStream = campusCenter;
+                    break;
+                case 'eastWest':
+                    buildingStream = eastWest;
+                    break;
+                case 'gateway':
+                    buildingStream = gateway;
+                    break;
+                case 'geophysics':
+                    buildingStream = geophysics;
+                    break;
+                case 'hamilton':
+                    buildingStream = hamilton;
+                    break;
+                case 'hawaii':
+                    buildingStream = hawaii;
+                    break;
+                case 'keller':
+                    buildingStream = keller;
+                    break;
+                case 'kennedy':
+                    buildingStream = kennedy;
+                    break;
+                case 'koreanStudies':
+                    buildingStream = koreanStudies;
+                    break;
+                case 'kuykendallNorth':
+                    buildingStream = kuykendallNorth;
+                    break;
+                case 'kuykendallWest':
+                    buildingStream = kuykendallWest;
+                    break;
+                case 'lawlibrary':
+                    buildingStream = lawLibrary;
+                    break;
+                case 'lawSchool':
+                    buildingStream = lawSchool;
+                    break;
+                case 'oceanography':
+                    buildingStream = oceanography;
+                    break;
+                case 'physical':
+                    buildingStream = physical;
+                    break;
+                case 'qlcc':
+                    buildingStream = qlcc;
+                    break;
+                case 'sinclair':
+                    buildingStream = sinclair;
+                    break;
+                case 'parking':
+                    buildingStream = parking;
+                    break;
+                case 'recCenter':
+                    buildingStream = recCenter;
+                    break;
+                case 'watanabe':
+                    buildingStream = watanabe;
+                    break;
+                case 'webster':
+                    buildingStream = webster;
+                    break;
+                default:
+                    buildingStream = admin;
+                    break;
+
+            }
+            counter++;
+
+            if (counter === 147)
+                counter = 0;
+            return Number(buildingStream[counter]);
+        }
+
+        function z() {
+            switch (building2.value) {
+                case 'admin':
+                    buildingStream2 = admin;
+                    break;
+                case 'art':
+                    buildingStream2 = art;
+                    break;
+                case 'bachman':
+                    buildingStream2 = bachman;
+                    break;
+                case 'campusCenter':
+                    buildingStream2 = campusCenter;
+                    break;
+                case 'crawford':
+                    buildingStream2 = campusCenter;
+                    break;
+                case 'eastWest':
+                    buildingStream2 = eastWest;
+                    break;
+                case 'gateway':
+                    buildingStream2 = gateway;
+                    break;
+                case 'geophysics':
+                    buildingStream2 = geophysics;
+                    break;
+                case 'hamilton':
+                    buildingStream2 = hamilton;
+                    break;
+                case 'hawaii':
+                    buildingStream2 = hawaii;
+                    break;
+                case 'keller':
+                    buildingStream2 = keller;
+                    break;
+                case 'kennedy':
+                    buildingStream2 = kennedy;
+                    break;
+                case 'koreanStudies':
+                    buildingStream2 = koreanStudies;
+                    break;
+                case 'kuykendallNorth':
+                    buildingStream2 = kuykendallNorth;
+                    break;
+                case 'kuykendallWest':
+                    buildingStream2 = kuykendallWest;
+                    break;
+                case 'lawlibrary':
+                    buildingStream2 = lawLibrary;
+                    break;
+                case 'lawSchool':
+                    buildingStream2 = lawSchool;
+                    break;
+                case 'oceanography':
+                    buildingStream2 = oceanography;
+                    break;
+                case 'physical':
+                    buildingStream2 = physical;
+                    break;
+                case 'qlcc':
+                    buildingStream2 = qlcc;
+                    break;
+                case 'sinclair':
+                    buildingStream2 = sinclair;
+                    break;
+                case 'parking':
+                    buildingStream2 = parking;
+                    break;
+                case 'recCenter':
+                    buildingStream2 = recCenter;
+                    break;
+                case 'watanabe':
+                    buildingStream2 = watanabe;
+                    break;
+                case 'webster':
+                    buildingStream2 = webster;
+                    break;
+                default:
+                    buildingStream2 = admin;
+                    break;
+
+            }
+            if (counter === 147)
+                counter = 0;
+            return Number(buildingStream2[counter]);
+        }
+
+        function renderStep() {
+            // move the window (you can think of different strategies).
+            var now = dates[counter];
+            var range = graph2d.getWindow();
+            var interval = range.end - range.start;
+            // move the window 90% to the left when now is larger than the end of the window
+            if(counter == 0){
+                graph2d.setWindow(dates[counter - 12], dates[counter + 12])
+            }
+            else if(now > range.end && counter > 110){
+                graph2d.setWindow(dates[counter], 'Thu Aug 22 2018 13:00:00 GMT-1000 Hawaii-Aleutian Standard Time')
+            }
+            else if (now > range.end) {
+                graph2d.setWindow(graph2d.fit(), dates[counter + 40], {animation: false});
+            }
+
+            setTimeout(renderStep, DELAY);
+
+
+        };
+
+        console.log(dates);
+        renderStep();
+
+        /**
+         * Add a new datapoint to the graph
+         */
+        function addDataPoint() {
+            if (go === 0 || counter === 147) {
+                console.log(counter);
+            }
+            else {
+                var y1 = y(counter);
+                var y2 = z(counter);
+                dataset.add({
+                    content: 'no',
+                    x: dates[counter],
+                    y: y1,
+                    group: groupCheck(building.value)
+                });
+                dataset.add({
+                    x: dates[counter],
+                    y: y2,
+                    group: groupCheck(building2.value)
+                });
+
+
+                // remove all data points which are no longer visible
+                var range = graph2d.getWindow();
+                var interval = range.end - range.start;
+                var oldIds = dataset.getIds({
+                    filter: function (item) {
+                        return item.x < range.start - interval;
+                    }
+                });
+            }
+            if (counter % 10 === 0 || counter === 0)
+                graph2d.fit();
+            dataset.remove(oldIds);
+            DELAY = delayCheck();
+            setTimeout(addDataPoint, DELAY);
+            resetCheck();
+        }
+
+        addDataPoint();
+    })
+
+
+</script>
+</body>
+</html>

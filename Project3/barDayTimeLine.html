@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <title>Title</title>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</head>
+<body>
+
+<div id="container" style="height: 400px; margin: auto; min-width: 310px; max-width: 600px"></div>
+
+
+<button id="btn">Monday</button>
+<button id="btn">Tuesday</button>
+<button id="btn">Wednesday</button>
+<button id="btn">Thursday</button>
+<button id="btn">Friday</button>
+<button id="btn">Saturday</button>
+<button id="btn">Sunday</button>
+
+
+</body>
+</html>
+<script>
+Highcharts.chart('container', {
+    chart: {
+        zoomType: 'xy'
+    },
+    title: {
+        text: 'Devices over Time'
+    },
+    xAxis: [{
+        categories: ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00', '22:00', '23:00']
+    }],
+    yAxis: [{ // Primary yAxis
+        labels: {
+            tickInterval: 50,
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+        },
+        title: {
+            text: 'Devices',
+            style: {
+                color: Highcharts.getOptions().colors[1]
+            }
+		}
+    },
+	{ // Secondary yAxis
+        title: {
+            text: '',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        labels: {
+            format: '{0}',
+            style: {
+                color: Highcharts.getOptions().colors[0]
+            }
+        },
+        opposite: true
+		
+    }],
+
+    tooltip: {
+        shared: true
+    },
+
+    series: [{
+        name: 'Average Devices',
+        type: 'spline',
+        yAxis: 1,
+        data: [18.4,
+12.2,
+11.12,
+11.32,
+11.48,
+15.92,
+33.36,
+59.4,
+98.36,
+121.36,
+146.36,
+163.32,
+162.16,
+157.64,
+135.08,
+103.04,
+101.68,
+95.56,
+93.72,
+79.88,
+44.76,
+40.96,
+37.68,
+28.84
+
+],
+        tooltip: {
+            pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f} </b> '
+        }
+    },
+	
+	{
+        name: 'Devices',
+        type: 'column',
+        data: [460,
+305,
+278,
+283,
+287,
+398,
+834,
+1485,
+2459,
+3034,
+3659,
+4083,
+4054,
+3941,
+3377,
+2576,
+2542,
+2389,
+2343,
+1997,
+1119,
+1024,
+942,
+721
+],
+        tooltip: {
+            pointFormat: '<span style="font-weight: bold; color: {series.color}">{series.name}</span>: <b>{point.y:.1f}</b> '
+        }
+    }]
+});
+</script>

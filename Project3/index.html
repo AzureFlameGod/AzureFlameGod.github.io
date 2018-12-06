@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <head>
+        <!-- Plotly.js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <!--Semantic UI-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css">
+    </head>
+
+</head>
+<body>
+        <div id="line"></div>
+</body>
+</html>
+
+<script>
+    Plotly.d3.csv("https://raw.githubusercontent.com/ManoaDataVisualizationProject/JAE/master/UHWeekXL.csv", function(err, rows) {
+        function unpack(rows, key) {
+            return rows.map(function (row) {
+                return row[key];
+            });
+        }
+
+
+        var names           = rows[2];
+        var dates           = unpack(rows, 'Access Point ID').splice(4,151);
+        var bachman         = unpack(rows, '1').splice(4, 151);
+        var kuykendallNorth = unpack(rows, '2').splice(4, 151);
+        var kuykendallWest  = unpack(rows, '3').splice(4, 151);
+        var geophysics      = unpack(rows, '4').splice(4, 151);
+        var physical        = unpack(rows, '5').splice(4, 151);
+        var sinclair        = unpack(rows, '6').splice(4, 151);
+        var admin           = unpack(rows, '7').splice(4, 151);
+        var parking         = unpack(rows, '8').splice(4, 151);
+        var crawford        = unpack(rows, '9').splice(4, 151);
+        var hawaii          = unpack(rows, '10').splice(4, 151);
+        var qlcc            = unpack(rows, '11').splice(4, 151);
+        var kennedy         = unpack(rows, '12').splice(4, 151);
+        var hamilton        = unpack(rows, '13').splice(4, 151);
+        var keller          = unpack(rows, '14').splice(4, 151);
+        var webster         = unpack(rows, '16').splice(4, 151);
+        var eastWest        = unpack(rows, '17').splice(4, 151);
+        var oceanography    = unpack(rows, '18').splice(4, 151);
+        var watanabe        = unpack(rows, '20').splice(4, 151);
+        var art             = unpack(rows, '21').splice(4, 151);
+        var lawSchool       = unpack(rows, '24').splice(4, 151);
+        var lawLibrary      = unpack(rows, '25').splice(4, 151);
+        var koreanStudies   = unpack(rows, '26').splice(4, 151);
+        var recCenter       = unpack(rows, '27').splice(4, 151);
+        var campusCenter    = unpack(rows, '29').splice(4, 151);
+        var gateway         = unpack(rows, '30').splice(4, 151);
+
+
+        var trace1 = {
+
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Bachman',
+            x: dates,
+            y: bachman,
+        };
+
+        var trace2 = {
+
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Kuykendall North',
+            x: dates,
+            y: kuykendallNorth,
+
+        };
+
+        var trace3 = {
+
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Kuykendall North',
+            x: dates,
+            y: kuykendallWest,
+
+        };
+
+        var trace4 = {
+
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Geophysics',
+            x: dates,
+            y: geophysics,
+
+        };
+
+        var trace5 = {
+
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Physical Science',
+            x: dates,
+            y: physical,
+
+        };
+
+        var trace6 = {
+
+            type: 'scatter',
+            mode: 'lines',
+            name: 'Sinclair Library',
+            x: dates,
+            y: sinclair,
+
+        };
+
+        var layout = {
+          title: 'Test'
+        };
+        data = [trace1, trace2, trace3, trace4, trace5, trace6];
+
+        Plotly.newPlot('line', data, layout, {responsive: true});
+
+        //console.log(rows[6]);
+        //iterate by location
+        //loop below is bachman hall
+
+
+
+        //console.log(dates);
+
+
+    });
+
+
+</script>
