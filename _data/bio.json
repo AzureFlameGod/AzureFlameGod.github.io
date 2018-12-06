@@ -1,12 +1,12 @@
 {
   "basics": {
     "name": "Vincent DiRienzo",
-    "label": "Hacker",
-    "picture": "https://azureflamegod.github.io/images/17437043.png",
+    "label": "M.S. Student",
+    "picture": "https://azureflamegod.github.io/images/me2.jpg",
     "email": "vincent.dirienzo@hawaii.edu",
     "phone": "",
     "website": "https://azureflamegod.github.io",
-    "summary": "Cybersecurity Enthusist, Software Engineer and Professional Slacker",
+    "summary": "",
     "location": {
       "address": "",
       "postalCode": "",
@@ -44,15 +44,15 @@
       ]
     },
     {
-      "name": "Cracking",
+      "name": "Software Development",
       "keywords": [
       ]
     },
     {
-      "name": "Slacking",
+      "name": "Project Management",
       "keywords": [
       ]
-    }
+    },
   ],
   "skills": [
     {
@@ -64,17 +64,22 @@
         "Java",
         "Javascript",
         "Assembly",
-        "Python"
+        "Python",
+        "Golang",
+        "Swift"
       ]
     },
     {
       "name": "Toolsets/OS",
       "level": "",
       "keywords": [
-        "WIndows",
+        "Windows",
         "MacOS",
         "Ubuntu",
         "Git/GitHub",
+        "Sublime",
+        "IntelliJ",
+        "Virtualization Software",
       ]
     }
   ],
@@ -82,7 +87,7 @@
     {
       "institution": "University of Hawaii",
       "area": "",
-      "studyType": "Masters in Compuer Science",
+      "studyType": "Masters in Compuer Science", "B.S. Information and Computer Science"
       "startDate": "",
       "endDate": "",
       "gpa": "",
